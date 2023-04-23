@@ -52,8 +52,10 @@ while curr_threads:
         posts_file.write(f"\t{json.dumps(ed.get_thread(thread['id']))},\n")
         count += 1
     curr_threads = ed.list_threads(course_id, limit=step, offset=offset)
-    offset += step
     print(f"Read {count} posts")
+    if offset > 100:
+        time.sleep(30)
+    offset += step
 
 posts_file.write('}\n')
 posts_file.close()
